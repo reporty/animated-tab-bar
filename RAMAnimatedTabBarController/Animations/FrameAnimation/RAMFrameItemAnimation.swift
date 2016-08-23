@@ -25,7 +25,7 @@ import QuartzCore
 
 class RAMFrameItemAnimation: RAMItemAnimation {
 
-    var animationImages : Array<CGImage> = Array()
+    var animationImages : Array<UIImage> = Array()
 
     var selectedImage : UIImage!
 
@@ -49,8 +49,8 @@ class RAMFrameItemAnimation: RAMItemAnimation {
 
     func createImagesArray(imageNames : Array<String>) {
         for name : String in imageNames {
-            let image = UIImage(named: name)?.CGImage
-            animationImages.append(image!)
+            let image = UIImage(named: name)!
+            animationImages.append(image)
         }
     }
 
@@ -73,11 +73,11 @@ class RAMFrameItemAnimation: RAMItemAnimation {
         textLabel.textColor = textSelectedColor
     }
 
-    func playFrameAnimation(icon : UIImageView, images : Array<CGImage>) {
+    func playFrameAnimation(icon : UIImageView, images : Array<UIImage>) {
         let frameAnimation = CAKeyframeAnimation(keyPath: "contents")
         frameAnimation.calculationMode = kCAAnimationDiscrete
         frameAnimation.duration = NSTimeInterval(duration)
-        frameAnimation.values = images
+        frameAnimation.values = images.map { $0.CGImage! }
         frameAnimation.repeatCount = 1
         frameAnimation.removedOnCompletion = false
         frameAnimation.fillMode = kCAFillModeForwards
