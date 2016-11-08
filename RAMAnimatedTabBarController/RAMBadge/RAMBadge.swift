@@ -15,13 +15,13 @@ class RAMBadge: UILabel {
     var numberLabel: UILabel?
     
     class func bage()->RAMBadge {
-        return RAMBadge.init(frame: CGRectMake(0, 0, 18, 18))
+        return RAMBadge.init(frame: CGRect(x: 0, y: 0, width: 18, height: 18))
     }
     
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        self.layer.backgroundColor = UIColor.redColor().CGColor;
+        self.layer.backgroundColor = UIColor.red.cgColor;
         self.layer.cornerRadius = frame.size.width / 2;
         
        configureNumberLabel()
@@ -39,13 +39,13 @@ class RAMBadge: UILabel {
     
     // PRAGMA: create
     
-    func createSizeConstraints(size: CGSize) {
+    func createSizeConstraints(_ size: CGSize) {
         let widthConstraint = NSLayoutConstraint(
             item: self,
-            attribute: NSLayoutAttribute.Width,
-            relatedBy: NSLayoutRelation.GreaterThanOrEqual,
+            attribute: NSLayoutAttribute.width,
+            relatedBy: NSLayoutRelation.greaterThanOrEqual,
             toItem: nil,
-            attribute: NSLayoutAttribute.NotAnAttribute,
+            attribute: NSLayoutAttribute.notAnAttribute,
             multiplier: 1,
             constant: size.width)
         self.addConstraint(widthConstraint)
@@ -53,10 +53,10 @@ class RAMBadge: UILabel {
         
         let heightConstraint = NSLayoutConstraint(
             item: self,
-            attribute: NSLayoutAttribute.Height,
-            relatedBy: NSLayoutRelation.Equal,
+            attribute: NSLayoutAttribute.height,
+            relatedBy: NSLayoutRelation.equal,
             toItem: nil,
-            attribute: NSLayoutAttribute.NotAnAttribute,
+            attribute: NSLayoutAttribute.notAnAttribute,
             multiplier: 1,
             constant: size.height)
         self.addConstraint(heightConstraint)
@@ -64,32 +64,32 @@ class RAMBadge: UILabel {
     
     func configureNumberLabel()  {
         
-        self.textAlignment = .Center
-        self.font = UIFont.systemFontOfSize(13)
-        self.textColor = UIColor.whiteColor()
+        self.textAlignment = .center
+        self.font = UIFont.systemFont(ofSize: 13)
+        self.textColor = UIColor.white
     }
     
     // PRAGMA: helpers
     
-    func addBadgeOnView(onView:UIView) {
+    func addBadgeOnView(_ onView:UIView) {
 
         onView.addSubview(self)
 
         // create constraints
         topConstraint = NSLayoutConstraint(item: self,
-            attribute: NSLayoutAttribute.Top,
-            relatedBy: NSLayoutRelation.Equal,
+            attribute: NSLayoutAttribute.top,
+            relatedBy: NSLayoutRelation.equal,
             toItem: onView,
-            attribute: NSLayoutAttribute.Top,
+            attribute: NSLayoutAttribute.top,
             multiplier: 1,
             constant: 3)
         onView.addConstraint(topConstraint!)
         
         centerXConstraint = NSLayoutConstraint(item: self,
-            attribute: NSLayoutAttribute.CenterX,
-            relatedBy: NSLayoutRelation.Equal,
+            attribute: NSLayoutAttribute.centerX,
+            relatedBy: NSLayoutRelation.equal,
             toItem: onView,
-            attribute: NSLayoutAttribute.CenterX,
+            attribute: NSLayoutAttribute.centerX,
             multiplier: 1,
             constant: 10)
         onView.addConstraint(centerXConstraint!)

@@ -24,56 +24,56 @@ import UIKit
 import QuartzCore
 
 enum RAMRotationDirection {
-    case Left
-    case Right
+    case left
+    case right
 }
 
 class RAMRotationAnimation : RAMItemAnimation {
 
     var direction : RAMRotationDirection!
 
-    override func playAnimation(icon : UIImageView, textLabel : UILabel) {
+    override func playAnimation(_ icon : UIImageView, textLabel : UILabel) {
         playRoatationAnimation(icon)
         textLabel.textColor = textSelectedColor
     }
 
-    override func deselectAnimation(icon : UIImageView, textLabel : UILabel, defaultTextColor : UIColor) {
+    override func deselectAnimation(_ icon : UIImageView, textLabel : UILabel, defaultTextColor : UIColor) {
         textLabel.textColor = defaultTextColor
       
         if let iconImage = icon.image {
-            let renderImage = iconImage.imageWithRenderingMode(.AlwaysTemplate)
+            let renderImage = iconImage.withRenderingMode(.alwaysTemplate)
             icon.image = renderImage
             icon.tintColor = defaultTextColor
         }
     }
 
-    override func selectedState(icon : UIImageView, textLabel : UILabel) {
+    override func selectedState(_ icon : UIImageView, textLabel : UILabel) {
         textLabel.textColor = textSelectedColor
       
         if let iconImage = icon.image {
-            let renderImage = iconImage.imageWithRenderingMode(.AlwaysTemplate)
+            let renderImage = iconImage.withRenderingMode(.alwaysTemplate)
             icon.image = renderImage
             icon.tintColor = textSelectedColor
         }
     }
 
-    func playRoatationAnimation(icon : UIImageView) {
+    func playRoatationAnimation(_ icon : UIImageView) {
 
         let rotateAnimation = CABasicAnimation(keyPath: "transform.rotation")
         rotateAnimation.fromValue = 0.0
 
         var toValue = CGFloat(M_PI * 2.0)
-        if direction != nil && direction == RAMRotationDirection.Left {
+        if direction != nil && direction == RAMRotationDirection.left {
             toValue = toValue * -1.0
         }
 
         rotateAnimation.toValue = toValue
-        rotateAnimation.duration = NSTimeInterval(duration)
+        rotateAnimation.duration = TimeInterval(duration)
 
-        icon.layer.addAnimation(rotateAnimation, forKey: "rotation360")
+        icon.layer.add(rotateAnimation, forKey: "rotation360")
       
         if let iconImage = icon.image {
-            let renderImage = iconImage.imageWithRenderingMode(.AlwaysTemplate)
+            let renderImage = iconImage.withRenderingMode(.alwaysTemplate)
             icon.image = renderImage
             icon.tintColor = iconSelectedColor
         }
@@ -84,7 +84,7 @@ class RAMLeftRotationAnimation : RAMRotationAnimation {
 
     override init() {
         super.init()
-        direction = RAMRotationDirection.Left
+        direction = RAMRotationDirection.left
     }
 }
 
@@ -93,7 +93,7 @@ class RAMRightRotationAnimation : RAMRotationAnimation {
 
     override init() {
         super.init()
-        direction = RAMRotationDirection.Right
+        direction = RAMRotationDirection.right
     }
 }
 

@@ -34,7 +34,7 @@ class RAMFrameItemAnimation: RAMItemAnimation {
 
     override func awakeFromNib() {
 
-        let path = NSBundle.mainBundle().pathForResource(imagesPath, ofType:"plist")
+        let path = Bundle.main.path(forResource: imagesPath, ofType:"plist")
 
         let dict : NSDictionary = NSDictionary(contentsOfFile: path!)!
 
@@ -47,40 +47,40 @@ class RAMFrameItemAnimation: RAMItemAnimation {
     }
 
 
-    func createImagesArray(imageNames : Array<String>) {
+    func createImagesArray(_ imageNames : Array<String>) {
         for name : String in imageNames {
             let image = UIImage(named: name)!
             animationImages.append(image)
         }
     }
 
-    override func playAnimation(icon : UIImageView, textLabel : UILabel) {
+    override func playAnimation(_ icon : UIImageView, textLabel : UILabel) {
 
         playFrameAnimation(icon, images:animationImages)
         textLabel.textColor = textSelectedColor
     }
 
-    override func deselectAnimation(icon : UIImageView, textLabel : UILabel, defaultTextColor : UIColor) {
+    override func deselectAnimation(_ icon : UIImageView, textLabel : UILabel, defaultTextColor : UIColor) {
         if isDeselectAnimation {
-            playFrameAnimation(icon, images:animationImages.reverse())
+            playFrameAnimation(icon, images:animationImages.reversed())
         }
 
         textLabel.textColor = defaultTextColor
     }
 
-    override func selectedState(icon : UIImageView, textLabel : UILabel) {
+    override func selectedState(_ icon : UIImageView, textLabel : UILabel) {
         icon.image = selectedImage
         textLabel.textColor = textSelectedColor
     }
 
-    func playFrameAnimation(icon : UIImageView, images : Array<UIImage>) {
+    func playFrameAnimation(_ icon : UIImageView, images : Array<UIImage>) {
         let frameAnimation = CAKeyframeAnimation(keyPath: "contents")
         frameAnimation.calculationMode = kCAAnimationDiscrete
-        frameAnimation.duration = NSTimeInterval(duration)
-        frameAnimation.values = images.map { $0.CGImage! }
+        frameAnimation.duration = TimeInterval(duration)
+        frameAnimation.values = images.map { $0.cgImage! }
         frameAnimation.repeatCount = 1
-        frameAnimation.removedOnCompletion = false
+        frameAnimation.isRemovedOnCompletion = false
         frameAnimation.fillMode = kCAFillModeForwards
-        icon.layer.addAnimation(frameAnimation, forKey: "frameAnimation")
+        icon.layer.add(frameAnimation, forKey: "frameAnimation")
     }
 }

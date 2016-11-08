@@ -29,37 +29,37 @@ class RAMTransitionItemAniamtions : RAMItemAnimation {
     override init() {
         super.init()
 
-        transitionOptions = UIViewAnimationOptions.TransitionNone
+        transitionOptions = UIViewAnimationOptions()
     }
 
-    override func playAnimation(icon : UIImageView, textLabel : UILabel) {
+    override func playAnimation(_ icon : UIImageView, textLabel : UILabel) {
 
         selectedColor(icon, textLabel: textLabel)
 
-        UIView.transitionWithView(icon, duration: NSTimeInterval(duration), options: transitionOptions, animations: {
+        UIView.transition(with: icon, duration: TimeInterval(duration), options: transitionOptions, animations: {
             }, completion: { _ in
         })
     }
 
-    override func deselectAnimation(icon : UIImageView, textLabel : UILabel, defaultTextColor : UIColor) {
+    override func deselectAnimation(_ icon : UIImageView, textLabel : UILabel, defaultTextColor : UIColor) {
 
         if let iconImage = icon.image {
-            let renderImage = iconImage.imageWithRenderingMode(.AlwaysOriginal)
+            let renderImage = iconImage.withRenderingMode(.alwaysOriginal)
             icon.image = renderImage
             textLabel.textColor = defaultTextColor
         }
     }
 
-    override func selectedState(icon : UIImageView, textLabel : UILabel) {
+    override func selectedState(_ icon : UIImageView, textLabel : UILabel) {
 
         selectedColor(icon, textLabel: textLabel)
     }
 
 
-    func selectedColor(icon : UIImageView, textLabel : UILabel) {
+    func selectedColor(_ icon : UIImageView, textLabel : UILabel) {
 
-        if let iconImage = icon.image where iconSelectedColor != nil {
-            let renderImage = iconImage.imageWithRenderingMode(.AlwaysTemplate)
+        if let iconImage = icon.image , iconSelectedColor != nil {
+            let renderImage = iconImage.withRenderingMode(.alwaysTemplate)
             icon.image = renderImage
             icon.tintColor = iconSelectedColor
         }
@@ -73,7 +73,7 @@ class RAMFlipLeftTransitionItemAniamtions : RAMTransitionItemAniamtions {
     override init() {
         super.init()
 
-        transitionOptions = UIViewAnimationOptions.TransitionFlipFromLeft
+        transitionOptions = UIViewAnimationOptions.transitionFlipFromLeft
     }
 }
 
@@ -83,7 +83,7 @@ class RAMFlipRightTransitionItemAniamtions : RAMTransitionItemAniamtions {
     override init() {
         super.init()
 
-        transitionOptions = UIViewAnimationOptions.TransitionFlipFromRight
+        transitionOptions = UIViewAnimationOptions.transitionFlipFromRight
     }
 }
 
@@ -92,7 +92,7 @@ class RAMFlipTopTransitionItemAniamtions : RAMTransitionItemAniamtions {
     override init() {
         super.init()
 
-        transitionOptions = UIViewAnimationOptions.TransitionFlipFromTop
+        transitionOptions = UIViewAnimationOptions.transitionFlipFromTop
     }
 }
 
@@ -101,6 +101,6 @@ class RAMFlipBottomTransitionItemAniamtions : RAMTransitionItemAniamtions {
     override init() {
         super.init()
 
-        transitionOptions = UIViewAnimationOptions.TransitionFlipFromBottom
+        transitionOptions = UIViewAnimationOptions.transitionFlipFromBottom
     }
 }
